@@ -111,10 +111,6 @@ streamlit run app.py
 PhonePe Pulse  
 https://github.com/PhonePe/pulse
 
-
-## Author
-
-Malaviga Ravi  
 ## Author
 
 Malaviga Ravi  
