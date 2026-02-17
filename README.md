@@ -1,103 +1,234 @@
-# PhonePe Transaction Insights
+                                                          **📊PhonePe Business Intelligence Dashboard**
 
-An end-to-end data analytics project that uses PhonePe Pulse data to analyze digital payment behavior across India, implemented in Python, SQL, PostgreSQL, and Streamlit.
+**📌 Project Overview****
 
-## Project Overview
+This is an end-to-end Business Intelligence (BI) project built using PhonePe Pulse data.
+The objective of this project is to analyze user behavior, digital transactions, and insurance adoption trends across India and present actionable insights through an interactive dashboard.
 
-This project analyzes transaction, user, and insurance data from the official PhonePe Pulse dataset. The data is extracted from JSON files, transformed using Python, stored in PostgreSQL, and visualized through an interactive Streamlit dashboard to generate business insights.
+**The project demonstrates the complete BI pipeline:**
 
-## Business Problem
+Data Collection → Data Engineering → Data Storage → Data Analysis → Data Visualization
 
-With increasing digital payment adoption, businesses need to understand:
-- User behavior
-- Regional performance
-- Insurance penetration
-- Device usage patterns
+**🎯 Business Objectives**
 
-This project aims to provide data-driven insights to support strategic decision-making.
+1. Understand device usage patterns across states
 
-## Tech Stack
+2. Analyze insurance growth trends
 
-- Python  
-- PostgreSQL  
-- SQL  
-- Pandas  
-- Streamlit  
-- Plotly  
-- Git & GitHub
+3. Measure user engagement levels
 
-## Project Architecture
+4. Identify top-performing regions
 
-PhonePe Pulse Data (GitHub)  
-→ Python ETL  
-→ PostgreSQL Database  
-→ SQL Queries  
-→ Streamlit Dashboard
+5. Support data-driven business decisions
 
-## Data Pipeline
+**🧰 Tech Stack**
 
-### Data Extraction
-Data is cloned from the official PhonePe Pulse GitHub repository and JSON files are parsed using Python.
+Category	Tools
 
-### Data Transformation
-JSON files are converted into Pandas DataFrames, cleaned, and standardized.
+   *Programming	Python
 
-### Data Loading
-Transformed data is stored into PostgreSQL tables using SQLAlchemy.
+   *Data Handling	Pandas, JSON
 
-## Database Tables
+   *Database	PostgreSQL
 
-- aggregated_transaction  
-- aggregated_user  
-- aggregated_insurance  
-- map_transaction  
-- map_user  
-- map_insurance  
-- top_state_transaction  
-- top_user  
-- top_insurance  
+   *ORM	SQLAlchemy
 
-## Dashboard Features
+   *Dashboard	Streamlit
 
-1. Device Dominance – User distribution by mobile brand  
-2. Insurance Growth – Top states by insurance revenue  
-3. User Engagement – App opens vs registrations  
-4. Insurance Engagement – Policy count analysis  
-5. Top Locations – District and pincode insights
+   *Visualization	Plotly
 
-## Key Business Insights
+   *Version Control	Git, GitHub
 
-- Top 3 brands contribute over 60% of users  
-- Southern states dominate insurance adoption  
-- Engagement varies significantly by region  
-- Insurance revenue is concentrated in a few states  
+   *📂 Dataset
 
-## Business Recommendations
+**Data is sourced from the official PhonePe Pulse GitHub Repository, which contains: Transaction data, User data, Insurance data in JSON format, structured by:
 
-- Focus marketing on high-performing states  
-- Introduce micro-insurance in tier-2 cities  
-- Optimize app for dominant Android brands  
-- Launch rural onboarding campaigns  
+State → Year → Quarter**
 
-## How to Run This Project
+ **🔄 Project Workflow (ETL Pipeline)**
 
-1. Clone repository  
-git clone https://github.com/yourusername/PhonePe-Transaction-Insights.git
+1. Data Collection
 
-2. Install libraries  
+Cloned the PhonePe Pulse repository using GitPython.
+
+2. Data Extraction
+
+Read nested JSON files using:
+
+os.listdir()
+
+json.load()
+
+Iterated through state, year, and quarter folders.
+
+3. Data Transformation
+
+Converted raw JSON into structured Pandas DataFrames:
+
+aggregated_transaction
+
+aggregated_user
+
+aggregated_insurance
+
+map_transaction
+
+map_user
+
+map_insurance
+
+top_user
+
+top_insurance
+
+4. Data Storage
+
+Stored all DataFrames into PostgreSQL using SQLAlchemy.
+
+Enabled fast SQL querying for dashboard.
+
+5. Data Visualization
+
+Built an interactive dashboard using Streamlit + Plotly
+
+Added filters for:
+
+State
+
+Year
+
+Quarter
+
+Top N records
+
+📊 Business Use Cases Implemented
+1. Device Dominance
+
+Analyzes:
+
+Most used mobile brands
+
+Total users vs app opens
+
+2. Insurance Growth
+
+Analyzes:
+
+State-wise insurance revenue
+
+Policy adoption trends
+
+3. User Engagement
+
+Analyzes:
+
+Registered users vs app activity
+
+High and low engagement districts
+
+4. Insurance Engagement
+
+Analyzes:
+
+District-level insurance usage
+
+Revenue contribution
+
+5. Top User Registration
+
+Analyzes:
+
+Top districts and pincodes by registrations
+
+**📈 Key KPIs**
+
+Total Registered Users
+
+Total App Opens
+
+Engagement Ratio
+
+Total Insurance Amount
+
+Total Transactions
+
+**🔍 Key Insights**
+
+Android devices dominate the user base.
+
+Metro cities show significantly higher engagement.
+
+Insurance adoption is concentrated in a few states.
+
+Several regions have high users but low engagement.
+
+**💡 Business Recommendations**
+
+Launch cashback and referral campaigns in low-engagement regions.
+
+Introduce micro-insurance products in tier-2 cities.
+
+Use regional language marketing.
+
+Partner with device manufacturers for app promotions.
+
+**🖥️ Dashboard Preview
+**
+The dashboard includes:
+
+KPI cards
+
+Bar charts
+
+Scatter plots
+
+Treemaps
+
+Pie charts
+with dynamic filters for better analysis.
+
+**🚀 How to Run the Project**
+
+Step 1: Clone the Repository
+git clone https://github.com/your-username/your-repo-name.git
+
+Step 2: Install Dependencies
 pip install -r requirements.txt
 
-3. Run ETL  
-python phonepe_etl.py
+Step 3: Setup PostgreSQL
 
-4. Run dashboard  
+**Create database:**
+
+CREATE DATABASE phonepe;
+
+
+**Update DB connection in code:**
+
+engine = create_engine("postgresql+psycopg2://user:password@localhost:5432/phonepe")
+
+Step 4: Run Streamlit App
 streamlit run app.py
+
+## 🏁 Conclusion
+
+This project showcases:
+
+Real-world data engineering
+
+Strong SQL and Python integration
+
+Practical business intelligence use cases
+
+Professional dashboard design
+
+It reflects how data can be transformed into meaningful business insights.
 
 ## Screenshots
 
-(Add your Streamlit dashboard images here)
+![ Device Dominance](<img width="1057" height="450" alt="newplot (1)" src="https://github.com/user-attachments/assets/e7216cba-d7f7-4171-9136-5f0a3a7f7102" />)
 
-![Dashboard](screenshots/dashboard1.png)
+
+
 
 ## Learning Outcomes
 
@@ -115,5 +246,5 @@ https://github.com/PhonePe/pulse
 
 Malaviga Ravi  
 Aspiring Data Analyst/Data Scientist  
-Skills: Python | SQL | Streamlit | Power BI | Excel
+Skills: Python, SQL, Data Visualization, BI Dashboards
  
