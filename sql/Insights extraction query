@@ -1,0 +1,62 @@
+----1.Device Dominance----
+SELECT 
+    state,
+    brand,
+    year,
+    quarter,
+    SUM(user_count) AS total_users,
+    SUM(app_opens) AS total_app_opens,
+    ROUND(SUM(app_opens)::numeric / SUM(user_count), 2) AS engagement_ratio
+FROM aggregated_user
+GROUP BY state, brand, year, quarter
+ORDER BY engagement_ratio;
+
+----2.Insurance Growth---------
+SELECT 
+    state,
+    year,
+    quarter,
+    SUM(insurance_amount) AS total_amount,
+    SUM(insurance_count) AS total_policies
+FROM aggregated_insurance
+GROUP BY state, year, quarter
+ORDER BY year, quarter, total_amount DESC;
+
+-----3. User Engagement and Growth Strategy ----
+SELECT state, hover_name,
+            SUM(registered_users) AS registered_users,
+            SUM(app_opens) AS app_opens
+        FROM map_user
+        GROUP BY state, hover_name;
+
+
+------4. Insurance Engagement-------
+SELECT 
+    state,
+    hover_name,
+    SUM(insurance_count) AS insurance_count,
+    SUM(insurance_amount) AS insurance_amount
+FROM map_insurance
+GROUP BY state, hover_name
+ORDER BY insurance_amount DESC;
+
+--------5.User Registration analysis------
+WITH ranked_users AS (
+    SELECT 
+	    state,
+        year,
+        quarter,
+        level,
+        entity_name,
+        SUM(registered_users) AS total_users,
+        ROW_NUMBER() OVER (
+            PARTITION BY level
+            ORDER BY SUM(registered_users) DESC
+        ) AS rank_no
+    FROM top_user
+    WHERE year = year AND quarter = quarter
+    GROUP BY state,year, quarter, level, entity_name
+)
+SELECT *
+FROM ranked_users
+WHERE rank_no <= 10;
