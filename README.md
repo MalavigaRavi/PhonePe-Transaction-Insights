@@ -1,227 +1,230 @@
   **📊PhonePe Business Intelligence Dashboard**
 
-**📌 Project Overview****
+**📌 Project Overview**
 
-This is an end-to-end Business Intelligence (BI) project built using PhonePe Pulse data.
-The objective of this project is to analyze user behavior, digital transactions, and insurance adoption trends across India and present actionable insights through an interactive dashboard.
+  This is an end-to-end Business Intelligence (BI) project built using PhonePe Pulse data.
+  
+  The objective of this project is to analyze user behavior, digital transactions, and insurance adoption trends across India and present actionable insights through an interactive dashboard.
 
 **The project demonstrates the complete BI pipeline:**
 
-Data Collection → Data Engineering → Data Storage → Data Analysis → Data Visualization
+     Data Collection → Data Engineering → Data Storage → Data Analysis → Data Visualization
 
 **🎯 Business Objectives**
 
-1. Understand device usage patterns across states
+   1. Understand device usage patterns across states
 
-2. Analyze insurance growth trends
+   2. Analyze insurance growth trends
 
-3. Measure user engagement levels
+   3. Measure user engagement levels
 
-4. Identify top-performing regions
+   4. Identify top-performing regions
 
-5. Support data-driven business decisions
+   5. Support data-driven business decisions
 
 **🧰 Tech Stack**
 
 Category	Tools
 
-   *Programming	Python
+       *Programming	Python
 
-   *Data Handling	Pandas, JSON
+       *Data Handling	Pandas, JSON
 
-   *Database	PostgreSQL
+       *Database	PostgreSQL
 
-   *ORM	SQLAlchemy
+       *ORM	SQLAlchemy
 
-   *Dashboard	Streamlit
+       *Dashboard	Streamlit
 
-   *Visualization	Plotly
+       *Visualization	Plotly
 
-   *Version Control	Git, GitHub
+       *Version Control	Git, GitHub
 
-   *📂 Dataset
+       *📂 Dataset
 
-**Data is sourced from the official PhonePe Pulse GitHub Repository, which contains: Transaction data, User data, Insurance data in JSON format, structured by:
+Data is sourced from the official PhonePe Pulse GitHub Repository, which contains: Transaction data, User data, Insurance data in JSON format, structured by:
 
-State → Year → Quarter**
+  **State → Year → Quarter**
 
  **🔄 Project Workflow (ETL Pipeline)**
 
-1. Data Collection
+       1. Data Collection
 
-Cloned the PhonePe Pulse repository using GitPython.
+            Cloned the PhonePe Pulse repository using GitPython.
 
-2. Data Extraction
+       2. Data Extraction
 
-Read nested JSON files using:
+            Read nested JSON files using:
+ 
+                 os.listdir()
 
-os.listdir()
+                 json.load()
 
-json.load()
+                 Iterated through state, year, and quarter folders.
 
-Iterated through state, year, and quarter folders.
+      3. Data Transformation
 
-3. Data Transformation
+            Converted raw JSON into structured Pandas DataFrames:
 
-Converted raw JSON into structured Pandas DataFrames:
+            aggregated_transacion
 
-aggregated_transaction
+            aggregated_user
 
-aggregated_user
+            aggregated_insurance
 
-aggregated_insurance
+            map_transaction
 
-map_transaction
+            map_user
 
-map_user
+            map_insurance
 
-map_insurance
+            top_state_transaction
 
-top_user
+            top_user
 
-top_insurance
+            top_insurance
 
-4. Data Storage
+     4. Data Storage
 
-Stored all DataFrames into PostgreSQL using SQLAlchemy.
+           Stored all DataFrames into PostgreSQL using SQLAlchemy.
 
-Enabled fast SQL querying for dashboard.
+           Enabled fast SQL querying for the dashboard.
 
-5. Data Visualization
+     5. Data Visualization
 
-Built an interactive dashboard using Streamlit + Plotly
+           Built an interactive dashboard using Streamlit + Plotly
 
-Added filters for:
+**Added filters for:**
 
-State
+    State
 
-Year
+    Year
 
-Quarter
+    Quarter
 
-Top N records
+    Top N records
 
-📊 Business Use Cases Implemented
-1. Device Dominance
+**📊 Business Use Cases Implemented**
 
-Analyzes:
+    1. Device Dominance
 
-Most used mobile brands
+        Analyzes:
 
-Total users vs app opens
+            Most used mobile brands
 
-2. Insurance Growth
+            Total users vs app opens
 
-Analyzes:
+    2. Insurance Growth
 
-State-wise insurance revenue
+        Analyzes:
 
-Policy adoption trends
+           State-wise insurance revenue
 
-3. User Engagement
+           Policy adoption trends
 
-Analyzes:
+    3. User Engagement
 
-Registered users vs app activity
+       Analyzes:
 
-High and low engagement districts
+          Registered users vs app activity
 
-4. Insurance Engagement
+          High and low engagement districts
 
-Analyzes:
+    4. Insurance Engagement
 
-District-level insurance usage
+        Analyzes:
 
-Revenue contribution
+          District-level insurance usage
 
-5. Top User Registration
+          Revenue contribution
 
-Analyzes:
+   5. Top User Registration
 
-Top districts and pincodes by registrations
+         Analyzes:
+
+            Top districts and pincodes by registrations
 
 **📈 Key KPIs**
 
-Total Registered Users
+    Total Registered Users
 
-Total App Opens
+    Total App Opens
 
-Engagement Ratio
+    Engagement Ratio
 
-Total Insurance Amount
+    Total Insurance Amount
 
-Total Transactions
+    Total Transactions
 
 **🔍 Key Insights**
 
-Android devices dominate the user base.
+    Android devices dominate the user base.
 
-Metro cities show significantly higher engagement.
+    Metro cities show significantly higher engagement.
 
-Insurance adoption is concentrated in a few states.
+    Insurance adoption is concentrated in a few states.
 
-Several regions have high users but low engagement.
+    Several regions have high users but low engagement.
 
 **💡 Business Recommendations**
 
-Launch cashback and referral campaigns in low-engagement regions.
+    Launch cashback and referral campaigns in low-engagement regions.
 
-Introduce micro-insurance products in tier-2 cities.
+    Introduce micro-insurance products in tier-2 cities.
 
-Use regional language marketing.
+    Use regional language marketing.
 
-Partner with device manufacturers for app promotions.
+    Partner with device manufacturers for app promotions.
 
-**🖥️ Dashboard Preview
-**
-The dashboard includes:
+**🖥️ Dashboard Preview**
 
-KPI cards
+   The dashboard includes:
 
-Bar charts
+      KPI cards
 
-Scatter plots
+      Bar charts
 
-Treemaps
+      Scatter plots
 
-Pie charts
-with dynamic filters for better analysis.
+      Treemaps
+
+       Pie charts with dynamic filters for better analysis.
 
 **🚀 How to Run the Project**
 
-Step 1: Clone the Repository
+ # Step 1: Clone the Repository
 git clone https://github.com/your-username/your-repo-name.git
 
-Step 2: Install Dependencies
+ # Step 2: Install Dependencies
 pip install -r requirements.txt
 
-Step 3: Setup PostgreSQL
+ # Step 3: Set up PostgreSQL
 
 **Create database:**
 
-CREATE DATABASE phonepe;
+   CREATE DATABASE phonepe;
 
 
 **Update DB connection in code:**
 
-engine = create_engine("postgresql+psycopg2://user:password@localhost:5432/phonepe")
+      engine = create_engine("postgresql+psycopg2://user:password@localhost:5432/phonepe")
 
-Step 4: Run Streamlit App
-streamlit run app.py
+  # Step 4: Run Streamlit App
+      streamlit run app.py
 
 ## 🏁 Conclusion
 
-This project showcases:
+----This project showcases:
 
-Real-world data engineering
+----Real-world data engineering
 
-Strong SQL and Python integration
+----Strong SQL and Python integration
 
-Practical business intelligence use cases
+----Practical business intelligence use cases
 
-Professional dashboard design
+----Professional dashboard design
 
-It reflects how data can be transformed into meaningful business insights.
+----It reflects how data can be transformed into meaningful business insights.
 
 ## Screenshots
 
