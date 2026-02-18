@@ -67,49 +67,52 @@ elif menu == "Dashboard":
     # =====================================================
     # 1. Device Dominance
     # =====================================================
+
     if case == "1. Device Dominance":
         st.header("📱 Device Dominance & Engagement")
 
         query = """
-        SELECT state, brand, year, quarter,
-               SUM(user_count) AS total_users,
-               SUM(app_opens) AS total_app_opens
+        SELECT 
+            state,
+            brand,
+            year,
+            quarter,
+            SUM(user_count) AS total_users,
+            SUM(app_opens) AS total_app_opens,
+            ROUND(SUM(app_opens)::numeric / SUM(user_count), 2) AS engagement_ratio
         FROM aggregated_user
         GROUP BY state, brand, year, quarter
+        ORDER BY engagement_ratio DESC;
         """
         df = pd.read_sql(query, engine)
 
-        if selected_state:
-            df = df[df["state"].isin(selected_state)]
-        if selected_year:
-            df = df[df["year"].isin(selected_year)]
-        if selected_quarter:
-            df = df[df["quarter"].isin(selected_quarter)]
+        col1, col2, col3 = st.columns(3)
+        col1.metric("Total Brands", df["brand"].nunique())
+        col2.metric("Total Users", int(df["total_users"].sum()))
+        col3.metric("Avg Engagement", round(df["engagement_ratio"].mean(), 2))
 
-        df = df.sort_values("total_users", ascending=False).head(top_n)
+        fig1 = px.bar(df, x="brand", y="total_users",
+                      title="Users by Device Brand")
+        st.plotly_chart(fig1, width="stretch")
 
-        c1, c2 = st.columns(2)
-        c1.metric("Total Users", int(df.total_users.sum()))
-        c2.metric("Avg App Opens", int(df.total_app_opens.mean()))
-
-        fig = px.bar(df, x="brand", y="total_users",
-                     title="Top Device Brands by Users",
-                     text_auto=True)
-        st.plotly_chart(fig, width="stretch")
-
+        fig2 = px.scatter(df, x="total_users", y="total_app_opens",
+                          size="engagement_ratio",
+                          color="brand",
+                          title="Users vs App Opens")
+        st.plotly_chart(fig2, width="stretch")
         st.subheader("🔍 Insights")
         st.markdown("""
-        - Android brands dominate the user base.
-        - A small number of brands contribute most users.
-        - Some brands have high registrations but lower engagement.
-        """)
+            - Android brands dominate the user base.
+            - A small number of brands contribute most users.
+            - Some brands have high registrations but lower engagement.
+            """)
 
         st.subheader("💡 Recommendations")
         st.markdown("""
-        - Optimize app performance for top Android brands.
-        - Partner with major OEMs for pre-install campaigns.
-        - Build lightweight app version for low-end devices.
-        """)
+            - Optimize app performance for top Android brands.
+            - Partner with major OEMs for pre-install campaigns.
+            - Build lightweight app version for low-end devices.
+            """)
 
     # =====================================================
     # 2. Insurance Growth
@@ -153,7 +156,6 @@ elif menu == "Dashboard":
         - Launch micro-insurance products in tier-2 cities.
         - Bundle insurance with UPI and recharge offers.
         """)
-
     # =====================================================
     # 3. User Engagement
     # =====================================================
@@ -257,7 +259,7 @@ elif menu == "Dashboard":
                SUM(insurance_amount) AS insurance_amount
         FROM map_insurance
         GROUP BY state, hover_name
-        """
+        ORDER BY insurance_amount DESC       """
         df = pd.read_sql(query, engine)
 
         fig1 = px.bar(df.head(top_n),
